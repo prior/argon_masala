@@ -1,13 +1,28 @@
-PlanetArgon
-===========
+planet_argon_recipes
+==================
+A rails plugin of capistrano recipes for Planet Argon's shared hosting.
 
-Introduction goes here.
+This will simplify deployment on Planet Argon's by encapsulating knowledge of their hosting contraints, traps, tricks, methods, etc.
+
+
+
+steps to setting up trouble-free deployment
+============================================
+1) determine the
+rake rails:freeze:gems #freeze rails version in vendor
+add 'config.gem' lines for all require gems in environment.rb
+rake gems:unpack:dependencies  #freezes all required gems
+capify .
+
+
+
 
 
 Example
 =======
+:pa_planet
 
 Example goes here.
 
 
-Copyright (c) 2008 [name of plugin creator], released under the MIT license
+Copyright (c) 2008 thorny_sun from cracklabs.com, released under the MIT license
