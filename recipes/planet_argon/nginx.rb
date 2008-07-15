@@ -93,7 +93,7 @@ EOS
 
   server {
     listen       127.0.0.1:<%= 8000 + user[-3,3].to_i %>;
-    server_name  <%= pa_target_domain %>;
+    server_name  <%= pa_target_domain + (pa_target_domain[0,4]=='www.' ? " #{pa_target_hostname}" : "") %>;
 
     root <%= current_path %>/public;
     index  index.html index.htm;
