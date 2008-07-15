@@ -50,8 +50,9 @@ EOS
 
 
     # setup roles on same domain (can't imagine you'll be splitting things up if you're on pa's shared server)
-    server pa_target_domain, :app, :web
-    server pa_target_domain, :db, :primary=>true
+    set :pa_server_domain, (['www'] + pa_target_domain.split('.')[-2,2]).join('.')
+    server pa_server_domain, :app, :web
+    server pa_server_domain, :db, :primary=>true
     # not allowed to define role in namespace !? above is a workaround?
 
     mongrel.cluster.digest
