@@ -1,28 +1,48 @@
+------------------------------
 planet_argon_recipes
-==================
+------------------------------
 A rails plugin of capistrano recipes for Planet Argon's shared hosting.
 
-This will simplify deployment on Planet Argon's by encapsulating knowledge of their hosting contraints, traps, tricks, methods, etc.
+This simplifies deployment on Planet Argon by encapsulating knowledge of
+their hosting contraints, traps, tricks, methods, etc.  This plugin 
+attempts to make things as easy as possible.  Hopefully it will save you
+a headache (hint: if you don't have a headache deploying on planetargon
+then it did)
 
 
 
+------------------------------
 steps to setting up trouble-free deployment
-============================================
-1) determine the
-rake rails:freeze:gems #freeze rails version in vendor
+------------------------------
+ensure host has mongrel, mongrel_cluster gems installed
+ensure local has latest capistrano, mongrel, mongrel_cluster
+rake rails:freeze:gems  #freeze rails library in vendor
 add 'config.gem' lines for all require gems in environment.rb
 rake gems:unpack:dependencies  #freezes all required gems
 capify .
+vhcs your domain
+set up your db if you need to
+
+
+
+------------------------------
+example
+------------------------------
+set :application, "planet_argon"
+set :user, "vu2000"
+set :pa_account_domain, "maindomain.com"
+set :pa_target_domain, "kickassdomain.net"
+
+set :ssh_options, { :forward_agent => true }
+
+set :scm, :git
+set :git_enable_submodules, true
+set :deploy_via, :remote_cache
+set :repository,  'git@cracklabs.com:plugins/apps/planet_argon.git'
+set :branch, 'master'
 
 
 
 
+Copyright (c) 2008 cracklabs.com, released under the MIT license
 
-Example
-=======
-:pa_planet
-
-Example goes here.
-
-
-Copyright (c) 2008 thorny_sun from cracklabs.com, released under the MIT license
