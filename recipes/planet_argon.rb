@@ -71,23 +71,23 @@ EOS
   end
 
   
-  namespace :applications do
-
-    desc <<EOS
-[internal] 
-EOS
-    task :add do
-
-    end
-
-    task :remove do
-    end
-
-    task :read do
-      
-    end
-
-end
+#  namespace :applications do
+#
+#    desc <<EOS
+#[internal] 
+#EOS
+#    task :add do
+#
+#    end
+#
+#    task :remove do
+#    end
+#
+#    task :read do
+#      
+#    end
+#
+#end
 
 on :load, 'pa:digest'
 after "deploy:setup", "pa:mongrel:cluster:setup_config", "pa:nginx:setup", "pa:rc_local:setup"
