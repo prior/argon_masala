@@ -49,9 +49,23 @@ required for argon_masala!
 
 once these are taken care of then no need to specify roles,servers
 
+others used by argon_masala:
+:pa_mongrel_count   : number of mongrel servers to use (defaults to 1)
+:pa_port_offset     : this is offset to use when specifying ports (defaults to 0)
+                    :    remember you only have 10 ports total to play with
+                    :    and you must specify each app's offset and count
+                    :    so that you don't tread on any of the other apps'
+                    :    mongrels
+
+others you won't have to touch unless you deviate from defaults
+:pa_mount_point     : mounting directory is relative to ~ (expects initial slash and none at end-- screwy-- know)
+                    : default is determined acccording to VCHS defaults for alias/subdomains
+                    : won't have to worry about if you use the VCHS default mount point
+
+
 
 ------------------------------
-my deploy.rb
+example deploy.rb
 ------------------------------
 set :application, "planet_argon"
 set :user, "vu2000"
@@ -75,6 +89,10 @@ to dos
 -tie nginx:start/restart/stop into other events
 -clean up database stuff-- perhaps use local database.production.yml
 -allow subdomains of nonaccount domains
+-document ssh/keys stuff
+-document document document
+-use capistrano dependency functionality to ensure correct gems, etc. are in place
+
 
 
 
