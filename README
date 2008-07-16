@@ -1,5 +1,5 @@
 ------------------------------
-planet_argon_recipes
+argon_masala
 ------------------------------
 A rails plugin of capistrano recipes for Planet Argon's shared hosting.
 
@@ -22,16 +22,40 @@ rake gems:unpack:dependencies  #freezes all required gems
 capify .
 vhcs your domain
 set up your db if you need to
+set up your deploy.rb (see below)
 
+then the magic happens:
+cap deploy:setup
+cap deploy:cold
+cap pa:nginx:start
+
+may have to do pa:nginx:restart for some reason
+
+thereafter only need to do a 
+cap deploy
+
+
+
+----------------
+deploy.rb
+----------------
+
+required for argon_masala!
+:pa_account_domain  : this is the main domain used to identify your account
+:pa_target_domain   : this is target domain for this application
+:user               : this is your vuxxxx username
+:application        : this is the name of your rails app
+
+once these are taken care of then no need to specify roles,servers
 
 
 ------------------------------
-example
+my deploy.rb
 ------------------------------
 set :application, "planet_argon"
 set :user, "vu2000"
 set :pa_account_domain, "maindomain.com"
-set :pa_target_domain, "kickassdomain.net"
+set :pa_target_domain, "www.kickassdomain.net"
 
 set :ssh_options, { :forward_agent => true }
 
@@ -41,6 +65,15 @@ set :deploy_via, :remote_cache
 set :repository,  'git@cracklabs.com:plugins/apps/planet_argon.git'
 set :branch, 'master'
 
+
+---------------
+to dos
+---------------
+-make each application aware of other application so explicit knowledge of ports and offsets isn't necessary
+-above would also make teardown and build up of applications easier (nginx configs and rclocal configs)
+-tie nginx:start/restart/stop into other events
+-clean up database stuff-- perhaps use local database.production.yml
+-allow subdomains of nonaccount domains
 
 
 
